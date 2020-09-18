@@ -39,7 +39,7 @@ Things you may want to cover:
 | last_kana  | string   | null: false |
 
 has_many:items
-has_many:order
+has_many:orders
 
 ## items
 
@@ -48,22 +48,29 @@ has_many:order
 | text      | string     | null: false |
 | price     | integer    | null: false |
 | user      | references | null: false foreign_key: true|
+| shipping  | integer    | null: false |
+| ship_pla  | integer    | null: false |
+| ship_day  | integer    | null: false |
+| condition | integer    | null: false |
+| favorite  | integer    | null: false |
+| report    | integer    | null: false |
 
-has_one:order
+
+has_one:orders
 belongs_to:user
 
-## order
+## orders
 
-| Column  | Type   | Options     |
-| ------- | ------ | ----------- |
-| item_id | reference | null: false foreign_key: true |
-| user_id | reference | null: false foreign_key: true |
+| Column | Type       | Options     |
+| ------ | ---------- | ----------- |
+| item   | references | null: false foreign_key: true |
+| user   | references | null: false foreign_key: true |
 
 belongs_to:item
 belongs_to:user
-has_one:address
+has_one:addresses
 
-## address
+## addresses
 
 | Column        | Type    | Options     |
 | ------------- | ------- | ----------- |
@@ -72,6 +79,6 @@ has_one:address
 | city          | string  | null: false |
 | house_number  | string  | null: false |
 | building_name | string  |             |
-| phone_num     | string  | null: false |
+| phone_num     | string  | null: false uniqueness: true|
 
-belong_to:order
+belongs_to:orders
