@@ -43,19 +43,19 @@ has_many:orders
 
 ## items
 
-| Column    | Type       | Options     |
-| --------- | ---------- | ----------- |
-| name      | string     | null: false |
-| text      | text       | null: false |
-| price     | integer    | null: false |
-| user      | references | null: false foreign_key: true|
-| shipping  | integer    | null: false |
-| ship_pla  | integer    | null: false |
-| ship_day  | integer    | null: false |
-| condition | integer    | null: false |
-| favorite  | integer    | null: false |
-| report    | integer    | null: false |
-
+| Column      | Type       | Options     |
+| ----------- | ---------- | ----------- |
+| name        | string     | null: false |
+| text        | text       | null: false |
+| price       | integer    | null: false |
+| user        | references | null: false foreign_key: true|
+| shipping_id | integer    | null: false |
+| ship_pla_id | integer    | null: false |
+| ship_day_id | integer    | null: false |
+| condition   | integer    | null: false |
+| favorite    | integer    | null: false |
+| report      | integer    | null: false |
+| category_id |integer     | null: false |
 
 has_one:order
 belongs_to:user
@@ -73,14 +73,16 @@ has_one:address
 
 ## addresses
 
-| Column        | Type      | Options     |
-| ------------- | --------- | ----------- |
-| postal_code   | string    | null: false |
-| prefecture    | integer   | null: false |
-| city          | string    | null: false |
-| house_number  | string    | null: false |
-| building_name | string    |             |
-| phone_num     | string    | null: false uniqueness: true |
-| order         | reference | null: false foreign_key: true |
+| Column        | Type       | Options     |
+| ------------- | ---------- | ----------- |
+| postal_code   | string     | null: false |
+| prefecture_id | integer    | null: false |
+| city          | string     | null: false |
+| house_number  | string     | null: false |
+| building_name | string     |             |
+| phone_num     | string     | null: false uniqueness: true |
+| order         | references | null: false foreign_key: true |
 
 belongs_to:order
+
+* active_hashで導入する部分は_idつけてる
