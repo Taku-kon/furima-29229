@@ -83,4 +83,4 @@ has_one:address
 | phone_num     | string    | null: false uniqueness: true |
 | order         | reference | null: false foreign_key: true |
 
-belongs_to:orders
+belongs_to:order
