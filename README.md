@@ -40,21 +40,14 @@ Things you may want to cover:
 
 has_many:items
 has_many:order
-has_one:address
 
 ## items
 
-| Column    | Type    | Options     |
-| --------- | ------- | ----------- |
-| text      | string  | null: false |
-| price     | integer | null: false |
-| user      | string  | null: false |
-| name      | string  | null: false |
-| shipping  | string  | null: false |
-| ship_pla  | string  | null: false |
-| ship_day  | string  | null: false |
-| condition | string  | null: false |
-
+| Column    | Type       | Options     |
+| --------- | ---------- | ----------- |
+| text      | string     | null: false |
+| price     | integer    | null: false |
+| user      | references | null: false foreign_key: true|
 
 has_one:order
 belongs_to:user
@@ -63,13 +56,12 @@ belongs_to:user
 
 | Column  | Type   | Options     |
 | ------- | ------ | ----------- |
-| item_id | string | null: false |
-| user_id | string | null: false |
-| buyer   | string | null: false |
-| id      | string | null: false |
+| item_id | reference | null: false foreign_key: true |
+| user_id | reference | null: false foreign_key: true |
 
 belongs_to:item
 belongs_to:user
+has_one:address
 
 ## address
 
@@ -80,7 +72,6 @@ belongs_to:user
 | city          | string  | null: false |
 | house_number  | string  | null: false |
 | building_name | string  |             |
+| phone_num     | string  | null: false |
 
-belong_to:user
-has_many:order
-
+belong_to:order
