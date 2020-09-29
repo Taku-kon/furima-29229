@@ -9,6 +9,35 @@ RSpec.describe User, type: :model do
     it "nickname,email,password,first-name,first-kana,last-name,last-kana,birthdayが存在すれば登録できる" do
       expect(@user).to be_valid
     end
+    it "passwordが６文字以上であれば登録できる" do
+      @user.password = "123456"
+      @user.password_confirmation = "123456"
+      expect(@user).to be_valid
+    end
+    it "passwordに半角英数字が含まれていれば登録できる" do
+      @user.password = "123abc"
+      @user.password_confirmation = "123abc"
+      expect(@user).to be_valid
+    end
+    it "last-kanaが全角カタカナであれば登録できる" do
+      @user.last_kana = "アイウエオ"
+      expect(@user).to be_valid
+    end
+    it "first-kanaが全角カタカナであれば登録できる" do
+      @user.first_kana = "アイウエオ"
+      expect(@user).to be_valid
+    end
+    it "last-nameが全角であれば登録できる" do
+      @user.last_name = "アイウエオ"
+      expect(@user).to be_valid
+    end
+    it "first-nameが全角であれば登録できる" do
+      @user.first_name = "アイウエオ"
+      expect(@user).to be_valid
+    end
+    
+
+
     it "nicknameが空だと登録できない" do
       @user.nickname = ""
       @user.valid?
@@ -46,11 +75,6 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
-    it "passwordが６文字以上であれば登録できる" do
-      @user.password = "123456"
-      @user.password_confirmation = "123456"
-      expect(@user).to be_valid
-    end
     it "passwordに半角英字を含んでないと登録できない" do
       @user.password = "123456"
       @user.password_confirmation = "123456"
@@ -62,11 +86,6 @@ RSpec.describe User, type: :model do
       @user.password_confirmation = "abcdef"
       @user.valid?
       expect(@user.errors.full_messages).to include("半角数字を含ませてください")
-    end
-    it "passwordに半角英数字が含まれていれば登録できる" do
-      @user.password = "123abc"
-      @user.password_confirmation = "123abc"
-      expect(@user).to be_valid
     end
     it "first-nameが空だと登録できない" do
       @user.first_name = ""
@@ -83,18 +102,10 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors[:first_name]).to include("は不正な値です")
     end
-    it "first-nameが全角であれば登録できる" do
-      @user.first_name = "アイウエオ"
-      expect(@user).to be_valid
-    end
     it "last-nameが全角でないと登録できない" do
       @user.last_name = "ｱｲｳｴｵ"
       @user.valid?
       expect(@user.errors[:last_name]).to include("は不正な値です")
-    end
-    it "last-nameが全角であれば登録できる" do
-      @user.last_name = "アイウエオ"
-      expect(@user).to be_valid
     end
     it "first-kanaが空だと登録できない" do
       @user.first_kana = ""
@@ -111,18 +122,10 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors[:first_kana]).to include("は不正な値です")
     end
-    it "first-kanaが全角カタカナであれば登録できる" do
-      @user.first_kana = "アイウエオ"
-      expect(@user).to be_valid
-    end
     it "last-kanaは全角カタカナでないと登録できない" do
       @user.last_kana = "あいうえお"
       @user.valid?
       expect(@user.errors[:last_kana]).to include("は不正な値です")
-    end
-    it "last-kanaが全角カタカナであれば登録できる" do
-      @user.last_kana = "アイウエオ"
-      expect(@user).to be_valid
     end
     it "birthdayが空だと登録できない" do
       @user.birthday = ""

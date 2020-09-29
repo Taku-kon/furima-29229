@@ -4,14 +4,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :password, presence: true, length: { minimum: 6 }
-  validates :password, presence: true, format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
-  validates :password, confirmation: true
-  validates :email, uniqueness: true
-  validates :email, presence: true, format: {with:  /\A\S+@\S+\.\S+\z/ }
-  validates :last_name, presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/ }
-  validates :last_kana, presence: true, format: {with: /\A[ァ-ヶー－]+\z/ }
-  validates :first_name, presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/ }
-  validates :first_kana, presence: true, format: {with: /\A[ァ-ヶー－]+\z/ }
-
+  with_options presence: true do
+    validates :password, length: { minimum: 6 }
+    validates :password, format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
+    validates :password, confirmation: true
+    validates :email, uniqueness: true
+    validates :email, format: {with:  /\A\S+@\S+\.\S+\z/ }
+    NAME_REGEX = /\A[ぁ-んァ-ン一-龥]/
+    KANA_REGEX = /\A[ァ-ヶー－]+\z/
+    validates :last_name, format: {with: NAME_REGEX }
+    validates :last_kana, format: {with: KANA_REGEX }
+    validates :first_name, format: {with: NAME_REGEX }
+    validates :first_kana, format: {with: KANA_REGEX }
+  end
 end
