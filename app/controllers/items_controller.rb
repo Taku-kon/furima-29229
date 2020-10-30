@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :signed_in, except: [:index]
   def index
-    @item = Item.all
+    @items = Item.all
   end
 
   def new
@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to action: :index
+      redirect_to controller: :items , action: :index
     else
       render :new
     end
