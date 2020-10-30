@@ -52,10 +52,10 @@ has_many:orders
 | shipping_id | integer    | null: false |
 | ship_pla_id | integer    | null: false |
 | ship_day_id | integer    | null: false |
-| condition   | integer    | null: false |
+| condition_id| integer    | null: false |
 | favorite    | integer    | null: false |
 | report      | integer    | null: false |
-| category_id |integer     | null: false |
+| category_id | integer    | null: false |
 
 has_one:order
 belongs_to:user
