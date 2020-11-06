@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :signed_in, only: [:new]
+  before_action :authenticate_user!, only: [:new]
   before_action :set_item, only: [:edit, :show]
 
   def index
@@ -34,12 +34,7 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    @tweet = Tweet.find(params[:id])
+    @item = Item.find(params[:id])
   end
 
-  def signed_in
-    unless user_signed_in?
-      redirect_to  '/users/sign_in'
-    end
-  end
 end
