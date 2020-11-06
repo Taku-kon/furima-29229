@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :signed_in, only: [:new]
   before_action :set_item, only: [:edit, :show]
-  
+
   def index
     @items = Item.all.order("created_at DESC")
   end
@@ -20,11 +20,11 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    
   end
 
   def edit
-    @item = Item.find(params[:id])
+    
   end
 
   private
