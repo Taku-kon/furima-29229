@@ -52,7 +52,7 @@ class ItemsController < ApplicationController
   end
 
   def login_check
-    unless user_signed_in?
+    unless user_signed_in? && current_user.id == @item.user_id
       render :show
     end
   end
