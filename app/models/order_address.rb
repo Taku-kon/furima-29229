@@ -4,7 +4,9 @@ class OrderAddress
 
   with_options presence: true do
     validates :phone_num, format: {with: /\A\d{10}\z|\A\d{11}\z/ }
-    validates :prefecture_id, :city, :house_number, :token, :user_id, :item_id
+    validates :prefecture_id, :city, :house_number, :token
+    validates :user_id
+    validates :item_id
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :phone_num, format: {with: /\A[0-9]+\z/, message: "is invalid. Input half-width characters."}
   end
