@@ -60,6 +60,17 @@ RSpec.describe Address, type: :model do
       expect(@address.errors.messages).to include("Postal code is invalid. Include hyphen(-)")
     end
 
+    it "item_idが空の状態では保存できない" do
+      @order.item_id = nil
+      @address.valid?
+      expect(@order.errors.full_message).to include("Item_id can't be blank")
+    end
+
+    it "user_idが空の状態では保存できない" do
+      @address.user_id = nil
+      @address.valid?
+      expect(@order.errors.full_message).to include("User_id can't be blank")
+    end
   end
 
 end
