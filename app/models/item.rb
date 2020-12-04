@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :ship_day
   has_one_attached :image
   belongs_to :user
+  has_one :order
 
   validates :name, :text, :image, :price, presence: true
   validates :category_id, :condition_id, :shipping_id, :ship_pla_id, :ship_day_id, numericality: { other_than: 1 }
