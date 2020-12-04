@@ -30,6 +30,12 @@ RSpec.describe Address, type: :model do
       expect(@address.errors.messages).to include("Prefecture can't be blank")
     end
 
+    it "都道府県が空欄では保存できない" do
+      @address.prefecture_id = nil
+      @address.valid?
+      expect(@address.errors.messages).to include("Prefecture can't be blank")
+    end
+
     it "市区町村が入力されていなければ保存できない" do
       @address.city = nil
       @address.valid?
@@ -63,13 +69,19 @@ RSpec.describe Address, type: :model do
     it "item_idが空の状態では保存できない" do
       @order.item_id = nil
       @address.valid?
-      expect(@order.errors.full_message).to include("Item_id can't be blank")
+      expect(@address.errors.full_message).to include("Item_id can't be blank")
     end
 
     it "user_idが空の状態では保存できない" do
       @address.user_id = nil
       @address.valid?
-      expect(@order.errors.full_message).to include("User_id can't be blank")
+      expect(@address.errors.full_message).to include("User_id can't be blank")
+    end
+
+    it "tokenが空では保存されない" do
+      @address.token = nil 
+      @address.valid?
+      expect(@address.erors.full_message).to include("Token can't be blank")
     end
   end
 
